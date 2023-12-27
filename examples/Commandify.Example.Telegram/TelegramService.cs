@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Hosting;
 using Telegram.Bot;
 
+namespace Commandify.Example.Telegram;
+
 public class TelegramService : BackgroundService
 {
     private readonly CommandifyUpdateHandler _commandifyUpdateHandler;
