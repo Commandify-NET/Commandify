@@ -30,20 +30,20 @@ class Build : NukeBuild
 
     [Solution] readonly Solution Solution;
     
-    public AbsolutePath SolutionDirectory => RootDirectory / "src";
+    public AbsolutePath SourcesDirectory => RootDirectory / "src";
     
     Target Clean => _ => _
         .Before(Restore)
         .Executes(() =>
         {
-            SolutionDirectory.GlobDirectories("**/bin", "**/obj").ForEach(_ => _.DeleteDirectory());
+            SourcesDirectory.GlobDirectories("**/bin", "**/obj").ForEach(_ => _.DeleteDirectory());
         });
 
     Target Restore => _ => _
         .DependsOn(Clean)
         .Executes(() =>
         {
-            DotNetRestore(_ => _.SetProjectFile(SolutionDirectory));
+            DotNetRestore(_ => _.SetProjectFile(Solution));
         });
 
     Target Compile => _ => _
