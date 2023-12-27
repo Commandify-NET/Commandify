@@ -20,6 +20,7 @@ on:
   push:
     branches:
       - dev
+      - 'feature/*'
 
 jobs:
   ubuntu-22_04:

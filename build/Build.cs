@@ -15,7 +15,7 @@ using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.IO.PathConstruction;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
-[GitHubActions("dev", GitHubActionsImage.Ubuntu2204, AutoGenerate = true, OnPushBranches = new[] { "dev" })]
+[GitHubActions("dev", GitHubActionsImage.Ubuntu2204, AutoGenerate = true, OnPushBranches = new[] { "dev", "feature/*" })]
 class Build : NukeBuild
 {
     /// Support plugins are available for:
