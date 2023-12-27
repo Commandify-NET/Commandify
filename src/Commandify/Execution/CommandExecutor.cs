@@ -2,6 +2,7 @@
 using Commandify.Abstractions.Conversion;
 using Commandify.Abstractions.Execution;
 using Commandify.Abstractions.Types;
+using Commandify.Abstractions.Types.Contexts;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Commandify.Execution;
@@ -50,5 +51,26 @@ public class CommandExecutor : ICommandExecutor
         }
 
         return commandTask;
+    }
+}
+
+public class CommandExecutor<TContext> : ICommandExecutor<TContext>
+    where TContext : class, ICommandContext
+{
+    private readonly ICommandExecutor _commandExecutor;
+    private readonly ICommandContextAccessor<TContext> _contextAccessor;
+
+    public CommandExecutor(ICommandExecutor commandExecutor, ICommandContextAccessor<TContext> contextAccessor)
+    {
+        _commandExecutor = commandExecutor;
+        _contextAccessor = contextAccessor;
+    }
+
+    public Task ExecuteAsync(ReadOnlySpan<char> text, TContext context)
+    {
+        _contextAccessor.Context = context;
+        
+        return _commandExecutor.ExecuteAsync(text)
+            .ContinueWith(_ => _contextAccessor.Context = null!);
     }
 }

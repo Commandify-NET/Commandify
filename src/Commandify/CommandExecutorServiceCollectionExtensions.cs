@@ -2,7 +2,9 @@
 using Commandify.Abstractions;
 using Commandify.Abstractions.Builders;
 using Commandify.Abstractions.Conversion;
+using Commandify.Abstractions.Execution;
 using Commandify.Abstractions.Types;
+using Commandify.Abstractions.Types.Contexts;
 using Commandify.Builders;
 using Commandify.Execution;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,11 +15,21 @@ public static class CommandExecutorServiceCollectionExtensions
 {
     public static IServiceCollection AddCommandExecutor(this IServiceCollection serviceCollection, Func<CommandExecutorBuilder, CommandExecutorBuilder> configureCommandExecutor, ServiceLifetime serviceLifetime = ServiceLifetime.Singleton)
     {
-        serviceCollection.AddSingleton(typeof(CommandContextAccessor<>));
-        
         var commandExecutorBuilder = configureCommandExecutor(new CommandExecutorBuilder(serviceCollection, ImmutableArray<CommandModuleInfo>.Empty, null));
+        
+        serviceCollection.Add(ServiceDescriptor.Describe(typeof(ICommandExecutor),
+            sp => commandExecutorBuilder.Build(sp), serviceLifetime));
 
-        serviceCollection.Add(ServiceDescriptor.Describe(typeof(CommandExecutor),
+        return serviceCollection;
+    }
+    
+    public static IServiceCollection AddCommandExecutor<TContext>(this IServiceCollection serviceCollection, Func<CommandExecutorBuilder<TContext>, CommandExecutorBuilder<TContext>> configureCommandExecutor, ServiceLifetime serviceLifetime = ServiceLifetime.Singleton) where TContext : class, ICommandContext
+    {
+        serviceCollection.AddSingleton(typeof(ICommandContextAccessor<>),typeof(CommandContextAccessor<>));
+        
+        var commandExecutorBuilder = configureCommandExecutor(new CommandExecutorBuilder<TContext>(serviceCollection, ImmutableArray<CommandModuleInfo>.Empty, null));
+        
+        serviceCollection.Add(ServiceDescriptor.Describe(typeof(ICommandExecutor<TContext>),
             sp => commandExecutorBuilder.Build(sp), serviceLifetime));
 
         return serviceCollection;

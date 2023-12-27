@@ -30,6 +30,7 @@ public partial class Generator
 
         sb.AppendLine($"namespace {module.Namespace};");
         sb.AppendLine($"using Commandify.Abstractions;");
+        sb.AppendLine($"using Commandify.Abstractions.Execution;");
         sb.AppendLine($"using Commandify.Abstractions.Types;");
         sb.AppendLine($"using System.Collections.Immutable;");
 
@@ -59,7 +60,7 @@ public partial class Generator
                             .ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)
                         ;
                     sb.Append($@"
-{paddingS}    public {type.Name}(CommandContextAccessor<{contextType}> contextAccessor) : base(contextAccessor)
+{paddingS}    public {type.Name}(ICommandContextAccessor<{contextType}> contextAccessor) : base(contextAccessor)
 {paddingS}    {{
 {paddingS}    }}
 ");
