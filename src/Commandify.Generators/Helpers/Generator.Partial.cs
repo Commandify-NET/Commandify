@@ -54,17 +54,17 @@ public partial class Generator
 {paddingS}    public static CommandModuleInfo ModuleInfo => new CommandModuleInfo(Name, typeof({module.ClassName}), ImmutableArray.Create({string.Join(", ", module.Commands.Select(_ => @$"new CommandInfo(""{_.Name}"", {(module.Name == _.Name ? "true" : "false")}, typeof({module.ClassName}).GetMethod(""{_.MethodName}""))"))}));
 ");
 
-                if (module.Symbol.BaseType?.Name.StartsWith("CommandModuleBase") ?? false)
-                {
-                    string contextType = module.Symbol.BaseType.TypeArguments.Single()
-                            .ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)
-                        ;
-                    sb.Append($@"
-{paddingS}    public {type.Name}(ICommandContextAccessor<{contextType}> contextAccessor) : base(contextAccessor)
-{paddingS}    {{
-{paddingS}    }}
-");
-                }
+//                 if (module.Symbol.BaseType?.Name.StartsWith("CommandModuleBase") ?? false)
+//                 {
+//                     string contextType = module.Symbol.BaseType.TypeArguments.Single()
+//                             .ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)
+//                         ;
+//                     sb.Append($@"
+// {paddingS}    public {type.Name}(ICommandContextAccessor<{contextType}> contextAccessor) : base(contextAccessor)
+// {paddingS}    {{
+// {paddingS}    }}
+// ");
+//                 }
             }
 
 

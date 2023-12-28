@@ -1,4 +1,5 @@
 ﻿using Commandify;
+using Commandify.Abstractions.Execution;
 using Commandify.Conversion.TypeReaders;
 using Commandify.Example.ConsoleApp;
 using Commandify.Execution;
@@ -6,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 IServiceCollection serviceCollection = new ServiceCollection();
 
-serviceCollection.AddCommandExecutor(_ => _
+serviceCollection.AddCommandExecutor<SampleContext>(_ => _
     .UseModule<HelpModule>())
     
     .AddTypeReaderPipeline(_ => _
@@ -14,6 +15,9 @@ serviceCollection.AddCommandExecutor(_ => _
 
 var serviceProvider = serviceCollection.BuildServiceProvider();
 
-var commandExecutor = serviceProvider.GetRequiredService<CommandExecutor>();
+var commandExecutor = serviceProvider.GetRequiredService<ICommandExecutor<SampleContext>>();
 
-await commandExecutor.ExecuteAsync("help");
+await commandExecutor.ExecuteAsync("help", new SampleContext
+{
+    Services = serviceProvider
+});

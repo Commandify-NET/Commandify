@@ -1,5 +1,4 @@
-﻿using Commandify.Abstractions;
-using Commandify.Abstractions.Execution;
+﻿using Commandify.Abstractions.Execution;
 using Commandify.Abstractions.Types.Contexts;
 
 namespace Commandify;

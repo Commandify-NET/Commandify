@@ -2,7 +2,7 @@
 
 namespace Commandify.Extensions;
 
-public static class ReadOnlySpanExtensions
+internal static class ReadOnlySpanExtensions
 {
     public static ReadOnlySpanSplitEnumerator Split(this ReadOnlySpan<char> source) => new(source);
 }

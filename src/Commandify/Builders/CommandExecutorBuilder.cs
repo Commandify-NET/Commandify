@@ -99,7 +99,7 @@ public class CommandExecutorBuilder<TContext>
     }
     
     public CommandExecutorBuilder<TContext> UseModule<TModule>(ServiceLifetime serviceLifetime = ServiceLifetime.Transient)
-        where TModule : CommandModuleBase<TContext>, ICommandModule
+        where TModule : ICommandModule<TContext>, ICommandModule
     {
         _serviceCollection.TryAdd(ServiceDescriptor.Describe(typeof(TModule), typeof(TModule), serviceLifetime));
         
@@ -110,7 +110,7 @@ public class CommandExecutorBuilder<TContext>
 
     public CommandExecutorBuilder<TContext> UseModule<TModule>(
         Func<CommandExecutorBuilder<TContext>, CommandExecutorBuilder<TContext>> configureChildren, ServiceLifetime serviceLifetime = ServiceLifetime.Transient)
-        where TModule : CommandModuleBase<TContext>, ICommandModule
+        where TModule : ICommandModule<TContext>, ICommandModule
     {
         _serviceCollection.TryAdd(ServiceDescriptor.Describe(typeof(TModule), typeof(TModule), serviceLifetime));
         
