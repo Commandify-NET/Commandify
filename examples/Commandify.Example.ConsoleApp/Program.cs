@@ -2,7 +2,6 @@
 using Commandify.Abstractions.Execution;
 using Commandify.Conversion.TypeReaders;
 using Commandify.Example.ConsoleApp;
-using Commandify.Execution;
 using Microsoft.Extensions.DependencyInjection;
 
 IServiceCollection serviceCollection = new ServiceCollection();

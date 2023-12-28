@@ -1,5 +1,4 @@
-﻿using System.Collections.Immutable;
-using System.Text;
+﻿using System.Text;
 using Commandify.Generators.Types;
 using Microsoft.CodeAnalysis;
 
@@ -49,11 +48,17 @@ public partial class Generator
 ");
             if (isLast)
             {
+                string commandsArray = !module.Commands.IsEmpty
+                    ? $"ImmutableArray.Create({string.Join(", ", module.Commands.Select(_ => @$"new CommandInfo(""{_.Name}"", {(module.Name == _.Name ? "true" : "false")}, typeof({module.ClassName}).GetMethod(""{_.MethodName}""))"))})"
+                    : "ImmutableArray<CommandInfo>.Empty";
+                
                 sb.Append($@"
 {paddingS}    public static string Name => ""{module.Name}"";
-{paddingS}    public static CommandModuleInfo ModuleInfo => new CommandModuleInfo(Name, typeof({module.ClassName}), ImmutableArray.Create({string.Join(", ", module.Commands.Select(_ => @$"new CommandInfo(""{_.Name}"", {(module.Name == _.Name ? "true" : "false")}, typeof({module.ClassName}).GetMethod(""{_.MethodName}""))"))}));
+{paddingS}    public static CommandModuleInfo ModuleInfo => new CommandModuleInfo(Name, typeof({module.ClassName}), {commandsArray});
 ");
 
+                
+                
 //                 if (module.Symbol.BaseType?.Name.StartsWith("CommandModuleBase") ?? false)
 //                 {
 //                     string contextType = module.Symbol.BaseType.TypeArguments.Single()

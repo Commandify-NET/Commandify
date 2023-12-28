@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace Commandify.Enumerators;
+﻿namespace Commandify.Enumerators;
 
 public ref struct ReadOnlySpanSplitEnumerator
 {

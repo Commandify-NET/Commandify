@@ -1,16 +1,15 @@
-﻿using Commandify.Abstractions;
-using Commandify.Abstractions.Execution;
+﻿using Commandify.Abstractions.Execution;
 using Commandify.Example.Telegram.Contexts;
 using Telegram.Bot;
 
 namespace Commandify.Example.Telegram.Commands;
 
-public abstract class TelegramModuleBase : ICommandModule<TelegramMessageContext>
+public abstract class TelegramModuleBase : CommandModuleBase<TelegramMessageContext>
 {
     private readonly ICommandContextAccessor<TelegramMessageContext> _contextAccessor;
     public TelegramMessageContext Context => _contextAccessor.Context;
 
-    protected TelegramModuleBase(ICommandContextAccessor<TelegramMessageContext> contextAccessor)
+    protected TelegramModuleBase(ICommandContextAccessor<TelegramMessageContext> contextAccessor) : base(contextAccessor)
     {
         _contextAccessor = contextAccessor;
     }

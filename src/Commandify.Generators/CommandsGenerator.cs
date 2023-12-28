@@ -1,5 +1,4 @@
 ﻿using System.Collections.Immutable;
-using System.Diagnostics;
 using Commandify.Generators.Helpers;
 using Commandify.Generators.Types;
 using Microsoft.CodeAnalysis;

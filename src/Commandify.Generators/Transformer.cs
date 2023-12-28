@@ -75,6 +75,9 @@ public class Transformer
 
             if (methodSymbol?.ReturnType is not { Name: "Task" })
                 continue;
+            
+            if(!methodSymbol.GetAttributes().Any(_ => _.AttributeClass?.Name is "CommandAttribute"))
+                continue;
 
             var commandName = method.GetCommandAttributeValue(syntaxContext.SemanticModel, "Name") ??
                               groupName ?? methodSymbol.Name;
