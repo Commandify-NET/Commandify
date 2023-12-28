@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Telegram.Bot;
 
-const string Token = "6251960488:AAG42svEhoBiab6kInx_p1pDcTR_NA6dx9c";
+const string Token = "<YOUR BOT API TOKEN>";
 
 var builder = Host.CreateApplicationBuilder();
 
