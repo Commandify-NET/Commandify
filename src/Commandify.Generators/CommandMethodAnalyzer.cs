@@ -55,13 +55,3 @@ public class CommandMethodAnalyzer : DiagnosticAnalyzer
         .Add(ShouldBeAsyncDiagnostic)
         .Add(SameMethodNameDiagnostic);
 }
-
-// public class CommandMethodFixer : CodeFixProvider
-// {
-//     public override Task RegisterCodeFixesAsync(CodeFixContext context)
-//     {
-//         context.Di
-//     }
-//
-//     public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray<string>.Empty;
-// }

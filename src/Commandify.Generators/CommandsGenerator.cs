@@ -14,9 +14,6 @@ public class CommandsGenerator : IIncrementalGenerator
 
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
-        // if (!Debugger.IsAttached)
-        //     Debugger.Launch();
-        
         var provider = context.SyntaxProvider
             .ForAttributeWithMetadataName(CommandModuleAttribute, IsCommandModule, (_, t) => _)
             .Collect()
@@ -45,9 +42,5 @@ public class CommandsGenerator : IIncrementalGenerator
             
             context.AddSource($"{module.ClassName}.g.cs", partialClass);
         }
-
-        // var executorCode = Generator.GenerateExecutor(data.Model, data.Modules, data.Compilation.AssemblyName!);
-        //
-        // context.AddSource("CommandExecutor.g.cs", executorCode);
     }
 }
