@@ -57,20 +57,6 @@ public partial class Generator
 {paddingS}    public static string Name => ""{module.Name}"";
 {paddingS}    public static CommandModuleInfo ModuleInfo => new CommandModuleInfo(Name, typeof({module.ClassName}), {commandsArray});
 ");
-
-                
-                
-//                 if (module.Symbol.BaseType?.Name.StartsWith("CommandModuleBase") ?? false)
-//                 {
-//                     string contextType = module.Symbol.BaseType.TypeArguments.Single()
-//                             .ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)
-//                         ;
-//                     sb.Append($@"
-// {paddingS}    public {type.Name}(ICommandContextAccessor<{contextType}> contextAccessor) : base(contextAccessor)
-// {paddingS}    {{
-// {paddingS}    }}
-// ");
-//                 }
             }
 
 

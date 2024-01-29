@@ -20,10 +20,6 @@ public static partial class SyntaxExtensions
             ? constValue.Value?.ToString() : null;
     }
     
-    
-    
-    
-    
     public static Optional<TypedConstant> GetAttributeArgumentValue(this MemberDeclarationSyntax syntax,
         SemanticModel model,
         string attributeName,
