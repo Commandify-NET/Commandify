@@ -4,7 +4,7 @@ namespace Commandify.Example.ConsoleApp;
 
 
 [CommandModule(Name = "help")]
-public partial class HelpModule : CommandModuleBase
+public partial class HelpModule : CommandModuleBase<SampleContext>
 {
     [Command]
     public Task HelpAsync()
