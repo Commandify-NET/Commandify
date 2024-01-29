@@ -91,3 +91,32 @@ var commandExecutor = serviceProvider.GetRequiredService<ICommandExecutor<HelpCo
 
 await commandExecutor.ExecuteAsync("help", new HelpContext() { Services = serviceProvider });
 ```
+
+### Command module actions
+
+Command module actions are used to execute your code before or after command execution. You can use them either by implementing `ICommandModuleActions` or inheriting from `CommandModuleBase`:
+
+```csharp
+public class SampleModule : CommandModuleBase
+{
+    public override Task OnActivatedAsync(CancellationToken cancellationToken)
+    {
+        return base.OnActivatedAsync(cancellationToken);
+    }
+
+    public override Task<bool> CheckPreConditionsAsync(CommandInfo commandInfo, CancellationToken cancellationToken)
+    {
+        return base.CheckPreConditionsAsync(commandInfo, cancellationToken);
+    }
+
+    public override Task OnAfterExecutionAsync(CommandInfo commandInfo, CancellationToken cancellationToken)
+    {
+        return base.OnAfterExecutionAsync(commandInfo, cancellationToken);
+    }
+
+    public override Task OnBeforeExecutionAsync(CommandInfo commandInfo, CancellationToken cancellationToken)
+    {
+        return base.OnBeforeExecutionAsync(commandInfo, cancellationToken);
+    }
+}
+```
