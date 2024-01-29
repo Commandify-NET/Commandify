@@ -33,10 +33,10 @@ public static partial class SyntaxExtensions
 
         foreach (var attribute in symbol.GetAttributes())
         {
-            if (!string.Equals(attributeName, attribute.AttributeClass.Name, StringComparison.OrdinalIgnoreCase))
+            if (!string.Equals(attributeName, attribute?.AttributeClass?.Name, StringComparison.OrdinalIgnoreCase))
                 continue;
 
-            foreach (var namedArgument in attribute.NamedArguments)
+            foreach (var namedArgument in attribute?.NamedArguments ?? ImmutableArray<KeyValuePair<string, TypedConstant>>.Empty)
             {
                 if (string.Equals(namedArgument.Key, argumentName, StringComparison.OrdinalIgnoreCase))
                 {

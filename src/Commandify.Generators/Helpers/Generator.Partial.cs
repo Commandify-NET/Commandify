@@ -31,6 +31,7 @@ public partial class Generator
         sb.AppendLine($"using Commandify.Abstractions;");
         sb.AppendLine($"using Commandify.Abstractions.Execution;");
         sb.AppendLine($"using Commandify.Abstractions.Types;");
+        sb.AppendLine($"using Commandify.Execution;");
         sb.AppendLine($"using System.Collections.Immutable;");
 
         int padding = 0;

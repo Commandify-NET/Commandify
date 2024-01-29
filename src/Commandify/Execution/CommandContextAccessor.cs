@@ -1,7 +1,7 @@
 ﻿using Commandify.Abstractions.Execution;
 using Commandify.Abstractions.Types.Contexts;
 
-namespace Commandify;
+namespace Commandify.Execution;
 
 public class CommandContextAccessor<TContext> : ICommandContextAccessor<TContext> where TContext : class, ICommandContext
 {
